@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MaritaKitty — Links</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+    :root{
+      --bg1: #ff8bd6;
+      --bg2: #7a8bff;
+      --white-trans: rgba(255,255,255,0.85);
+      --muted: rgba(255,255,255,0.75);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      background:
+        radial-gradient(800px 400px at 10% 10%, rgba(255,183,197,0.08), transparent),
+        radial-gradient(700px 350px at 90% 90%, rgba(163,197,255,0.08), transparent),
+        linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 60%);
+      padding:28px;
+      color:#111;
+    }
+
+    /* Card */
+    .card{
+      width:380px;
+      max-width:96vw;
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
+      border-radius:20px;
+      padding:26px;
+      box-shadow: 0 12px 40px rgba(10,10,20,0.28);
+      backdrop-filter: blur(8px);
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::after{
+      content:'';
+      position:absolute;
+      right:-30%;
+      top:-40%;
+      width:360px;height:360px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05), transparent 40%);
+      transform:rotate(35deg);
+      pointer-events:none;
+    }
+
+    /* Avatar */
+    .avatar-wrap{display:flex;justify-content:center}
+    .avatar{
+      width:116px;height:116px;border-radius:50%;
+      border:6px solid rgba(255,255,255,0.14);
+      overflow:hidden;box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+      background: linear-gradient(135deg,#fff0,#fff0);
+      margin-bottom:12px;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    h1{
+      font-size:20px;color:#fff;text-shadow:0 3px 12px rgba(0,0,0,0.4);
+      margin-bottom:6px;font-weight:700;
+    }
+    p.sub{font-size:13px;color:var(--muted);margin-bottom:14px}
+
+    /* Links grid */
+    .links{display:grid;gap:12px;margin-top:6px}
+    .link{
+      display:flex;align-items:center;gap:12px;
+      padding:12px 14px;border-radius:12px;text-decoration:none;
+      background: linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.35));
+      color:#111;font-weight:700;box-shadow:0 8px 20px rgba(12,12,20,0.10);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .link:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(12,12,20,0.16)}
+
+    /* icon box */
+    .icon-box {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+
+    .icon-box:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+    }
+
+    .icon-box img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      transition: transform 0.25s ease;
+    }
+
+    .icon-box:hover img {
+      transform: scale(1.15);
+    }
+
+    .meta{margin-left:auto;font-size:13px;color:rgba(0,0,0,0.55);font-weight:800}
+
+    /* Music player */
+    .music-player {
+      margin-top:16px;
+      text-align:center;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    #music-toggle {
+      padding:8px 16px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      background: rgba(255,255,255,0.15);
+      color:#fff;
+      font-weight:700;
+      backdrop-filter: blur(6px);
+      transition: all 0.2s ease;
+    }
+    #music-toggle:hover { background: rgba(255,255,255,0.25); }
+
+    .volume-control {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background: rgba(255,255,255,0.15);
+      padding:6px 12px;
+      border-radius:12px;
+      backdrop-filter: blur(6px);
+    }
+
+    #volume-slider {
+      width:150px;
+      cursor:pointer;
+      accent-color:#7a8bff;
+    }
+
+    #song-info {
+      margin-top:8px;
+      padding:4px 8px;
+      border-radius:8px;
+      background: rgba(255,255,255,0.15);
+      color:#fff;
+      font-size:12px;
+      backdrop-filter: blur(6px);
+      display:inline-block;
+    }
+
+    .footer{margin-top:14px;font-size:12px;color:rgba(255,255,255,0.85)}
+
+    @media(max-width:420px){
+      .card{padding:18px}
+      .avatar{width:92px;height:92px}
+      .icon-box{width:50px;height:50px}
+      .icon-box img{width:28px;height:28px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" role="main" aria-label="MaritaKitty Links">
+    <div class="avatar-wrap">
+      <div class="avatar" aria-hidden="true">
+        <img src="marita.jpeg" alt="MaritaKitty Avatar">
+      </div>
+    </div>
+
+    <h1>MaritaKitty</h1>
+    <p class="sub">Streamer • Gamer • Norway/Thai</p>
+
+    <div class="links" role="list">
+      <a class="link" href="https://twitch.tv/MaritaKitty" target="_blank">
+        <div class="icon-box"><img src="twitch.jpg" alt="Twitch"></div>
+        <div>Twitch</div><div class="meta">→</div>
+      </a>
+      <a class="link" href="https://www.tiktok.com/@maritakittyyy" target="_blank">
+        <div class="icon-box"><img src="tiktok logo.jpg" alt="TikTok"></div>
+        <div>TikTok</div><div class="meta">→</div>
+      </a>
+      <a class="link" href="https://discord.gg/ephQmnyJ" target="_blank">
+        <div class="icon-box"><img src="discord.png" alt="Discord"></div>
+        <div>Discord</div><div class="meta">→</div>
+      </a>
+    </div>
+
+    <!-- Music player -->
+<div class="music-player">
+  <button id="music-toggle" aria-pressed="false">⏸️ Pause Lofi Beats</button>
+  <div class="volume-control">
+    <span id="mute-btn" style="cursor:pointer;">🔊</span>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+  </div>
+  <audio id="bg-music" autoplay></audio>
+  <div id="song-info">Loading...</div>
+</div>
+
+<script>
+const music = document.getElementById('bg-music');
+const btn = document.getElementById('music-toggle');
+const volume = document.getElementById('volume-slider');
+const muteBtn = document.getElementById('mute-btn');
+const songInfo = document.getElementById('song-info');
+
+const songs = [
+  'lofi/lofi1.mp3',
+  'lofi/lofi2.mp3',
+  'lofi/lofi3.mp3',
+  'lofi/lofi4.mp3',
+  'lofi/lofi5.mp3'
+];
+
+const songNames = [
+  'Sunset by Aventure',
+  'Love in Japan by Milkey Wyvers',
+  'Time by Avanti',
+  'Florida Keys by Hoffy Beats',
+  'Warm Cup of Coffee by Moavii'
+];
+
+// Random song to start
+let current = Math.floor(Math.random() * songs.length);
+music.src = songs[current];
+music.volume = volume.value;
+songInfo.textContent = songNames[current];
+let isMuted = false;
+
+// Play next random song when one ends
+music.addEventListener('ended', () => {
+  let next;
+  do { next = Math.floor(Math.random() * songs.length); } 
+  while (next === current);
+  current = next;
+  music.src = songs[current];
+  music.play();
+  songInfo.textContent = songNames[current];
+});
+
+// Play/pause toggle
+btn.addEventListener('click', () => {
+  if (music.paused) {
+    music.play();
+    btn.textContent = '⏸️ Pause Lofi Beats';
+    btn.setAttribute('aria-pressed', 'true');
+  } else {
+    music.pause();
+    btn.textContent = '🎵 Play Lofi Beats';
+    btn.setAttribute('aria-pressed', 'false');
+  }
+});
+
+// Volume control
+volume.addEventListener('input', () => {
+  music.volume = volume.value;
+  if(isMuted && volume.value > 0) {
+    isMuted = false;
+    muteBtn.textContent = '🔊';
+  }
+});
+
+// Mute/unmute toggle
+muteBtn.addEventListener('click', () => {
+  isMuted = !isMuted;
+  music.muted = isMuted;
+  muteBtn.textContent = isMuted ? '🔇' : '🔊';
+});
+
+// Autoplay attempt
+window.addEventListener('load', () => {
+  music.play().catch(() => {
+    console.log('Autoplay blocked; user must interact to play.');
+  });
+});
+</script>
+</body>
+</html>

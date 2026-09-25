@@ -216,63 +216,8 @@
     .tiktok{ --accent: var(--tiktok); }
     .discord{ --accent: var(--discord); }
 
-    /* Music widget */
-    .music-player{
-      margin-top:22px;
-      display:flex; align-items:center; gap:12px;
-      padding:10px 14px;
-      border-radius:var(--radius);
-      background:var(--panel);
-      border:1px solid var(--panel-line);
-      backdrop-filter: blur(10px);
-    }
-    .disc{
-      width:34px; height:34px; border-radius:50%; flex-shrink:0;
-      background: conic-gradient(from 0deg, var(--surface), var(--lilac-deep), var(--surface));
-      position:relative;
-      animation: spin 4s linear infinite paused;
-    }
-    .disc::after{
-      content:''; position:absolute; inset:38%;
-      border-radius:50%; background:var(--surface);
-    }
-    .disc.spinning{ animation-play-state: running; }
-    @keyframes spin{ to{ transform: rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce){
-      .disc{ animation:none !important; }
-    }
-
-    .music-mid{ flex:1; min-width:0; }
-    #song-info{
-      font-size:13px; font-weight:600;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .music-sub{ font-size:11px; color:var(--ink-soft); margin-top:1px; }
-
-    .music-controls{ display:flex; align-items:center; gap:8px; }
-    #music-toggle{
-      width:32px; height:32px; border-radius:10px; border:none;
-      background: var(--surface);
-      color:var(--candy-pink); font-size:14px; cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      box-shadow: 0 2px 8px var(--toggle-shadow);
-      transition: background .15s ease, transform .15s ease;
-    }
-    #music-toggle:hover{ background: var(--toggle-hover); transform: scale(1.06); }
-
-    #mute-btn{ cursor:pointer; font-size:14px; }
-    #volume-slider{
-      width:64px; cursor:pointer; accent-color: var(--candy-pink);
-    }
-
-    .footer{
-      margin-top:18px; text-align:center;
-      font-size:11px; color: var(--ink-soft);
-    }
-
-    @media (max-width:420px){
-      .music-controls #volume-slider{ width:46px; }
-    }
+      }
+    
   </style>
 </head>
 <body>
@@ -320,106 +265,9 @@
       </a>
     </nav>
 
-    <div class="music-player">
-      <div class="disc" id="disc" aria-hidden="true"></div>
-      <div class="music-mid">
-        <div id="song-info">Loading…</div>
-        <div class="music-sub">Lofi beats</div>
-      </div>
-      <div class="music-controls">
-        <button id="music-toggle" aria-pressed="true" aria-label="Pause music">⏸</button>
-        <span id="mute-btn" role="button" tabindex="0" aria-label="Mute">🔊</span>
-        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5" aria-label="Volume">
-      </div>
-      <audio id="bg-music" autoplay></audio>
-    </div>
+ 
 
     <p class="footer">Made with ❤️ by TheAlphie inc</p>
   </main>
-
-  <script>
-    const music = document.getElementById('bg-music');
-    const btn = document.getElementById('music-toggle');
-    const volume = document.getElementById('volume-slider');
-    const muteBtn = document.getElementById('mute-btn');
-    const songInfo = document.getElementById('song-info');
-    const disc = document.getElementById('disc');
-
-    const songs = [
-      'lofi/lofi1.mp3',
-      'lofi/lofi2.mp3',
-      'lofi/lofi3.mp3',
-      'lofi/lofi4.mp3',
-      'lofi/lofi5.mp3'
-    ];
-
-    const songNames = [
-      'Sunset by Aventure',
-      'Love in Japan by Milkey Wyvers',
-      'Time by Avanti',
-      'Florida Keys by Hoffy Beats',
-      'Warm Cup of Coffee by Moavii'
-    ];
-
-    let current = Math.floor(Math.random() * songs.length);
-    music.src = songs[current];
-    music.volume = volume.value;
-    songInfo.textContent = songNames[current];
-    let isMuted = false;
-
-    music.addEventListener('ended', () => {
-      let next;
-      do { next = Math.floor(Math.random() * songs.length); }
-      while (next === current);
-      current = next;
-      music.src = songs[current];
-      music.play();
-      songInfo.textContent = songNames[current];
-    });
-
-    btn.addEventListener('click', () => {
-      if (music.paused) {
-        music.play();
-        btn.textContent = '⏸';
-        btn.setAttribute('aria-pressed', 'true');
-        btn.setAttribute('aria-label', 'Pause music');
-        disc.classList.add('spinning');
-      } else {
-        music.pause();
-        btn.textContent = '▶';
-        btn.setAttribute('aria-pressed', 'false');
-        btn.setAttribute('aria-label', 'Play music');
-        disc.classList.remove('spinning');
-      }
-    });
-
-    volume.addEventListener('input', () => {
-      music.volume = volume.value;
-      if (isMuted && volume.value > 0) {
-        isMuted = false;
-        music.muted = false;
-        muteBtn.textContent = '🔊';
-      }
-    });
-
-    function toggleMute(){
-      isMuted = !isMuted;
-      music.muted = isMuted;
-      muteBtn.textContent = isMuted ? '🔇' : '🔊';
-    }
-    muteBtn.addEventListener('click', toggleMute);
-    muteBtn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMute(); }
-    });
-
-    window.addEventListener('load', () => {
-      music.play().then(() => disc.classList.add('spinning')).catch(() => {
-        btn.textContent = '▶';
-        btn.setAttribute('aria-pressed', 'false');
-        btn.setAttribute('aria-label', 'Play music');
-        console.log('Autoplay blocked; user must interact to play.');
-      });
-    });
-  </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +9,6 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
-    /* ---- Token system ----
-       Light (default): blush/lilac/peach pastel sky, gold + candy-pink sparkle.
-       Dark (prefers-color-scheme): deep night sky, mint + pink aurora sparkle.
-       Everything below reads from these variables so the two themes stay in sync.
-       twitch/tiktok/discord stay constant in both — true platform colors, not theme colors.
-    */
     :root{
       color-scheme: light dark;
       --ink: #4a2452;
@@ -73,8 +68,15 @@
       }
     }
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html,body{
+      height:100%;
+    }
 
     body{
       font-family:'Inter',system-ui,Segoe UI,Roboto,Arial;
@@ -84,7 +86,7 @@
       align-items:center;
       justify-content:center;
       padding:32px 20px;
-      background: var(--bg-a);
+      background:var(--bg-a);
       overflow-x:hidden;
     }
 
@@ -99,10 +101,14 @@
         radial-gradient(65% 45% at 50% 100%, var(--glow-3), transparent 60%),
         linear-gradient(160deg, var(--bg-a) 0%, var(--bg-b) 55%, var(--bg-c) 100%);
       background-size:140% 140%;
-      animation: drift 22s ease-in-out infinite alternate;
+      animation:drift 22s ease-in-out infinite alternate;
     }
+
     .stars{
-      position:fixed; inset:0; z-index:0; opacity:.75;
+      position:fixed;
+      inset:0;
+      z-index:0;
+      opacity:.75;
       background-image:
         radial-gradient(2px 2px at 20% 30%, #fff, transparent),
         radial-gradient(2.5px 2.5px at 70% 20%, var(--gold), transparent),
@@ -113,118 +119,256 @@
         radial-gradient(2px 2px at 30% 55%, var(--candy-pink), transparent),
         radial-gradient(1.5px 1.5px at 92% 85%, #fff, transparent);
       background-repeat:no-repeat;
-      animation: twinkle 3.5s ease-in-out infinite alternate;
+      animation:twinkle 3.5s ease-in-out infinite alternate;
     }
+
     @keyframes drift{
-      from{ background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
-      to{ background-position: 8% 6%, 92% 8%, 46% 92%, 0 0; }
+      from{
+        background-position:0% 0%, 100% 0%, 50% 100%, 0 0;
+      }
+      to{
+        background-position:8% 6%, 92% 8%, 46% 92%, 0 0;
+      }
     }
+
     @keyframes twinkle{
-      from{ opacity:.55; }
-      to{ opacity:.95; }
-    }
-    @media (prefers-reduced-motion: reduce){
-      .sky, .stars{ animation:none; }
+      from{opacity:.55;}
+      to{opacity:.95;}
     }
 
-    .page{ position:relative; z-index:1; width:380px; max-width:100%; }
+    @media (prefers-reduced-motion:reduce){
+      .sky,
+      .stars{
+        animation:none;
+      }
+    }
 
-    /* Avatar with kitty-ear frame */
-    .avatar-wrap{ display:flex; justify-content:center; margin-bottom:14px; }
+    .page{
+      position:relative;
+      z-index:1;
+      width:380px;
+      max-width:100%;
+    }
+
+    /* Avatar */
+    .avatar-wrap{
+      display:flex;
+      justify-content:center;
+      margin-bottom:14px;
+    }
+
     .avatar{
       position:relative;
-      width:108px; height:108px;
+      width:108px;
+      height:108px;
     }
-    .avatar::before, .avatar::after{
+
+    .avatar::before,
+    .avatar::after{
       content:'';
       position:absolute;
       top:-9px;
-      width:0; height:0;
+      width:0;
+      height:0;
       border-left:14px solid transparent;
       border-right:14px solid transparent;
       border-bottom:26px solid var(--ear-color);
-      filter: drop-shadow(0 0 10px var(--ear-color));
-    }
-    .avatar::before{ left:2px; transform:rotate(-18deg); }
-    .avatar::after{ right:2px; transform:rotate(18deg); }
-    .avatar img{
-      position:relative; z-index:1;
-      width:100%; height:100%; border-radius:50%;
-      object-fit:cover; display:block;
-      border:3px solid var(--avatar-border);
-      box-shadow: 0 0 0 6px var(--avatar-ring), 0 10px 26px var(--avatar-shadow);
+      filter:drop-shadow(0 0 10px var(--ear-color));
     }
 
-    .identity{ text-align:center; margin-bottom:24px; }
+    .avatar::before{
+      left:2px;
+      transform:rotate(-18deg);
+    }
+
+    .avatar::after{
+      right:2px;
+      transform:rotate(18deg);
+    }
+
+    .avatar img{
+      position:relative;
+      z-index:1;
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      object-fit:cover;
+      display:block;
+      border:3px solid var(--avatar-border);
+      box-shadow:
+        0 0 0 6px var(--avatar-ring),
+        0 10px 26px var(--avatar-shadow);
+    }
+
+    .identity{
+      text-align:center;
+      margin-bottom:24px;
+    }
+
     h1{
-      font-family:'Baloo 2', system-ui;
+      font-family:'Baloo 2',system-ui;
       font-size:26px;
       font-weight:700;
       letter-spacing:.2px;
     }
-    p.sub{ font-size:14px; color:var(--ink-soft); margin-top:4px; }
+
+    p.sub{
+      font-size:14px;
+      color:var(--ink-soft);
+      margin-top:4px;
+    }
 
     /* Links */
-    .links{ display:flex; flex-direction:column; gap:10px; }
+    .links{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
     .link{
       position:relative;
-      display:flex; align-items:center; gap:14px;
+      display:flex;
+      align-items:center;
+      gap:14px;
       padding:13px 16px 13px 18px;
       border-radius:var(--radius);
       background:var(--panel);
       border:1px solid var(--panel-line);
       text-decoration:none;
       color:var(--ink);
-      backdrop-filter: blur(10px);
-      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+      backdrop-filter:blur(10px);
+      transition:
+        transform .16s ease,
+        border-color .16s ease,
+        background .16s ease;
     }
+
     .link::before{
       content:'';
-      position:absolute; left:0; top:8px; bottom:8px; width:3px;
+      position:absolute;
+      left:0;
+      top:8px;
+      bottom:8px;
+      width:3px;
       border-radius:3px;
-      background: var(--accent);
+      background:var(--accent);
     }
-    .link:hover, .link:focus-visible{
-      transform: translateX(3px);
-      border-color: var(--accent);
-      background: var(--panel-hover);
+
+    .link:hover,
+    .link:focus-visible{
+      transform:translateX(3px);
+      border-color:var(--accent);
+      background:var(--panel-hover);
       outline:none;
     }
-    .link:focus-visible{ box-shadow: 0 0 0 2px var(--accent); }
+
+    .link:focus-visible{
+      box-shadow:0 0 0 2px var(--accent);
+    }
 
     .link .icon-box{
-      width:42px; height:42px; border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      background: var(--surface-soft);
-      box-shadow: 0 2px 6px var(--icon-shadow);
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--surface-soft);
+      box-shadow:0 2px 6px var(--icon-shadow);
       flex-shrink:0;
     }
-    .link .icon-box img{ width:24px; height:24px; object-fit:contain; }
 
-    .link .label{ display:flex; flex-direction:column; gap:1px; }
-    .link .platform{ font-weight:600; font-size:15px; }
-    .link .handle{ font-size:12px; color:var(--ink-soft); }
+    .link .icon-box img{
+      width:24px;
+      height:24px;
+      object-fit:contain;
+    }
+
+    .link .label{
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+    }
+
+    .link .platform{
+      font-weight:600;
+      font-size:15px;
+    }
+
+    .link .handle{
+      font-size:12px;
+      color:var(--ink-soft);
+    }
 
     .link .go{
       margin-left:auto;
-      width:16px; height:16px;
-      color: var(--accent);
+      width:16px;
+      height:16px;
+      color:var(--accent);
       flex-shrink:0;
     }
 
-    .twitch{ --accent: var(--twitch); }
-    .tiktok{ --accent: var(--tiktok); }
-    .discord{ --accent: var(--discord); }
+    .twitch{
+      --accent:var(--twitch);
+    }
 
+    .tiktok{
+      --accent:var(--tiktok);
+    }
+
+    .discord{
+      --accent:var(--discord);
+    }
+
+    /* Cute Footer */
+    .footer{
+      text-align:center;
+      margin-top:24px;
+      font-family:'Baloo 2',system-ui;
+      font-size:13px;
+      font-weight:600;
+      color:var(--ink-soft);
+      letter-spacing:.3px;
+      opacity:.9;
+    }
+
+    .footer span{
+      color:var(--candy-pink);
+      font-size:17px;
+      display:inline-block;
+      margin:0 3px;
+      animation:heartbeat 1.8s ease-in-out infinite;
+    }
+
+    .footer strong{
+      color:var(--ink);
+      font-weight:700;
+    }
+
+    @keyframes heartbeat{
+      0%,100%{
+        transform:scale(1);
       }
-    
+      50%{
+        transform:scale(1.18);
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .footer span{
+        animation:none;
+      }
+    }
   </style>
 </head>
+
 <body>
+
   <div class="sky" aria-hidden="true"></div>
   <div class="stars" aria-hidden="true"></div>
 
   <main class="page" role="main" aria-label="MaritaKitty Links">
+
     <div class="avatar-wrap">
       <div class="avatar">
         <img src="marita.jpeg" alt="MaritaKitty avatar">
@@ -237,37 +381,93 @@
     </div>
 
     <nav class="links" aria-label="Social links">
-      <a class="link twitch" href="https://twitch.tv/MaritaKitty" target="_blank" rel="noopener">
-        <div class="icon-box"><img src="twitch.jpg" alt="" aria-hidden="true"></div>
+
+      <a
+        class="link twitch"
+        href="https://twitch.tv/MaritaKitty"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="icon-box">
+          <img src="twitch.jpg" alt="" aria-hidden="true">
+        </div>
+
         <div class="label">
           <span class="platform">Twitch</span>
           <span class="handle">Live streams & VODs</span>
         </div>
-        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M9 6l6 6-6 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </a>
 
-      <a class="link tiktok" href="https://www.tiktok.com/@maritakittyy" target="_blank" rel="noopener">
-        <div class="icon-box"><img src="tiktok logo.jpg" alt="" aria-hidden="true"></div>
+      <a
+        class="link tiktok"
+        href="https://www.tiktok.com/@maritakittyy"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="icon-box">
+          <img src="tiktok logo.jpg" alt="" aria-hidden="true">
+        </div>
+
         <div class="label">
           <span class="platform">TikTok</span>
           <span class="handle">@maritakittyyy</span>
         </div>
-        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M9 6l6 6-6 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </a>
 
-      <a class="link discord" href="https://discord.gg/wcrbWv3UZm" target="_blank" rel="noopener">
-        <div class="icon-box"><img src="discord.png" alt="" aria-hidden="true"></div>
+      <a
+        class="link discord"
+        href="https://discord.gg/wcrbWv3UZm"
+        target="_blank"
+        rel="noopener"
+      >
+        <div class="icon-box">
+          <img src="discord.png" alt="" aria-hidden="true">
+        </div>
+
         <div class="label">
           <span class="platform">Discord</span>
           <span class="handle">Join the community</span>
         </div>
-        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M9 6l6 6-6 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </a>
+
     </nav>
 
- 
+    <p class="footer">
+      Made with <span>♡</span> by <strong>TheAlphie</strong>
+    </p>
 
-    <p class="footer">Made with ❤️ by TheAlphie inc</p>
   </main>
+
 </body>
 </html>
+```

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MaritaKitty — Links</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+    /* ---- Token system ----
+       Light (default): blush/lilac/peach pastel sky, gold + candy-pink sparkle.
+       Dark (prefers-color-scheme): deep night sky, mint + pink aurora sparkle.
+       Everything below reads from these variables so the two themes stay in sync.
+       twitch/tiktok/discord stay constant in both — true platform colors, not theme colors.
+    */
+    :root{
+      color-scheme: light dark;
+      --ink: #4a2452;
+      --ink-soft: rgba(74,36,82,0.62);
+      --bg-a: #ffd6ec;
+      --bg-b: #e3d1ff;
+      --bg-c: #ffe3d1;
+      --candy-pink: #ff8fc7;
+      --lilac-deep: #b393ff;
+      --gold: #ffd76b;
+      --panel: rgba(255,255,255,0.55);
+      --panel-line: rgba(255,255,255,0.7);
+      --panel-hover: rgba(255,255,255,0.75);
+      --surface: #ffffff;
+      --surface-soft: rgba(255,255,255,0.85);
+      --ear-color: rgba(255,126,200,0.55);
+      --avatar-border: rgba(255,255,255,0.9);
+      --avatar-ring: rgba(255,143,199,0.25);
+      --avatar-shadow: rgba(179,111,205,0.35);
+      --icon-shadow: rgba(179,111,205,0.18);
+      --toggle-shadow: rgba(179,111,205,0.25);
+      --toggle-hover: #fff5fa;
+      --glow-1: rgba(255,215,107,0.35);
+      --glow-2: rgba(179,147,255,0.40);
+      --glow-3: rgba(255,143,199,0.45);
+      --twitch: #9146ff;
+      --tiktok: #1ec8c2;
+      --discord: #5865f2;
+      --radius: 16px;
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --ink: #f3f0ff;
+        --ink-soft: rgba(243,240,255,0.68);
+        --bg-a: #0a0b1a;
+        --bg-b: #14132c;
+        --bg-c: #1b1533;
+        --candy-pink: #ff7ec8;
+        --lilac-deep: #9b8cff;
+        --gold: #6bf0c2;
+        --panel: rgba(20,19,44,0.55);
+        --panel-line: rgba(243,240,255,0.14);
+        --panel-hover: rgba(255,255,255,0.06);
+        --surface: #201c3c;
+        --surface-soft: rgba(255,255,255,0.10);
+        --ear-color: rgba(255,126,200,0.5);
+        --avatar-border: rgba(243,240,255,0.75);
+        --avatar-ring: rgba(155,140,255,0.2);
+        --avatar-shadow: rgba(0,0,0,0.45);
+        --icon-shadow: rgba(0,0,0,0.35);
+        --toggle-shadow: rgba(0,0,0,0.4);
+        --toggle-hover: #2a2550;
+        --glow-1: rgba(107,240,194,0.18);
+        --glow-2: rgba(255,126,200,0.16);
+        --glow-3: rgba(155,140,255,0.2);
+      }
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+
+    body{
+      font-family:'Inter',system-ui,Segoe UI,Roboto,Arial;
+      color:var(--ink);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px 20px;
+      background: var(--bg-a);
+      overflow-x:hidden;
+    }
+
+    /* Sky */
+    .sky{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      background:
+        radial-gradient(55% 38% at 15% 12%, var(--glow-1), transparent 60%),
+        radial-gradient(60% 40% at 88% 18%, var(--glow-2), transparent 60%),
+        radial-gradient(65% 45% at 50% 100%, var(--glow-3), transparent 60%),
+        linear-gradient(160deg, var(--bg-a) 0%, var(--bg-b) 55%, var(--bg-c) 100%);
+      background-size:140% 140%;
+      animation: drift 22s ease-in-out infinite alternate;
+    }
+    .stars{
+      position:fixed; inset:0; z-index:0; opacity:.75;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+        radial-gradient(2.5px 2.5px at 70% 20%, var(--gold), transparent),
+        radial-gradient(1.5px 1.5px at 40% 70%, #fff, transparent),
+        radial-gradient(2px 2px at 85% 60%, var(--candy-pink), transparent),
+        radial-gradient(2.5px 2.5px at 60% 85%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 10% 80%, var(--gold), transparent),
+        radial-gradient(2px 2px at 30% 55%, var(--candy-pink), transparent),
+        radial-gradient(1.5px 1.5px at 92% 85%, #fff, transparent);
+      background-repeat:no-repeat;
+      animation: twinkle 3.5s ease-in-out infinite alternate;
+    }
+    @keyframes drift{
+      from{ background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
+      to{ background-position: 8% 6%, 92% 8%, 46% 92%, 0 0; }
+    }
+    @keyframes twinkle{
+      from{ opacity:.55; }
+      to{ opacity:.95; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .sky, .stars{ animation:none; }
+    }
+
+    .page{ position:relative; z-index:1; width:380px; max-width:100%; }
+
+    /* Avatar with kitty-ear frame */
+    .avatar-wrap{ display:flex; justify-content:center; margin-bottom:14px; }
+    .avatar{
+      position:relative;
+      width:108px; height:108px;
+    }
+    .avatar::before, .avatar::after{
+      content:'';
+      position:absolute;
+      top:-9px;
+      width:0; height:0;
+      border-left:14px solid transparent;
+      border-right:14px solid transparent;
+      border-bottom:26px solid var(--ear-color);
+      filter: drop-shadow(0 0 10px var(--ear-color));
+    }
+    .avatar::before{ left:2px; transform:rotate(-18deg); }
+    .avatar::after{ right:2px; transform:rotate(18deg); }
+    .avatar img{
+      position:relative; z-index:1;
+      width:100%; height:100%; border-radius:50%;
+      object-fit:cover; display:block;
+      border:3px solid var(--avatar-border);
+      box-shadow: 0 0 0 6px var(--avatar-ring), 0 10px 26px var(--avatar-shadow);
+    }
+
+    .identity{ text-align:center; margin-bottom:24px; }
+    h1{
+      font-family:'Baloo 2', system-ui;
+      font-size:26px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    p.sub{ font-size:14px; color:var(--ink-soft); margin-top:4px; }
+
+    /* Links */
+    .links{ display:flex; flex-direction:column; gap:10px; }
+    .link{
+      position:relative;
+      display:flex; align-items:center; gap:14px;
+      padding:13px 16px 13px 18px;
+      border-radius:var(--radius);
+      background:var(--panel);
+      border:1px solid var(--panel-line);
+      text-decoration:none;
+      color:var(--ink);
+      backdrop-filter: blur(10px);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .link::before{
+      content:'';
+      position:absolute; left:0; top:8px; bottom:8px; width:3px;
+      border-radius:3px;
+      background: var(--accent);
+    }
+    .link:hover, .link:focus-visible{
+      transform: translateX(3px);
+      border-color: var(--accent);
+      background: var(--panel-hover);
+      outline:none;
+    }
+    .link:focus-visible{ box-shadow: 0 0 0 2px var(--accent); }
+
+    .link .icon-box{
+      width:42px; height:42px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      background: var(--surface-soft);
+      box-shadow: 0 2px 6px var(--icon-shadow);
+      flex-shrink:0;
+    }
+    .link .icon-box img{ width:24px; height:24px; object-fit:contain; }
+
+    .link .label{ display:flex; flex-direction:column; gap:1px; }
+    .link .platform{ font-weight:600; font-size:15px; }
+    .link .handle{ font-size:12px; color:var(--ink-soft); }
+
+    .link .go{
+      margin-left:auto;
+      width:16px; height:16px;
+      color: var(--accent);
+      flex-shrink:0;
+    }
+
+    .twitch{ --accent: var(--twitch); }
+    .tiktok{ --accent: var(--tiktok); }
+    .discord{ --accent: var(--discord); }
+
+    /* Music widget */
+    .music-player{
+      margin-top:22px;
+      display:flex; align-items:center; gap:12px;
+      padding:10px 14px;
+      border-radius:var(--radius);
+      background:var(--panel);
+      border:1px solid var(--panel-line);
+      backdrop-filter: blur(10px);
+    }
+    .disc{
+      width:34px; height:34px; border-radius:50%; flex-shrink:0;
+      background: conic-gradient(from 0deg, var(--surface), var(--lilac-deep), var(--surface));
+      position:relative;
+      animation: spin 4s linear infinite paused;
+    }
+    .disc::after{
+      content:''; position:absolute; inset:38%;
+      border-radius:50%; background:var(--surface);
+    }
+    .disc.spinning{ animation-play-state: running; }
+    @keyframes spin{ to{ transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce){
+      .disc{ animation:none !important; }
+    }
+
+    .music-mid{ flex:1; min-width:0; }
+    #song-info{
+      font-size:13px; font-weight:600;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .music-sub{ font-size:11px; color:var(--ink-soft); margin-top:1px; }
+
+    .music-controls{ display:flex; align-items:center; gap:8px; }
+    #music-toggle{
+      width:32px; height:32px; border-radius:10px; border:none;
+      background: var(--surface);
+      color:var(--candy-pink); font-size:14px; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 2px 8px var(--toggle-shadow);
+      transition: background .15s ease, transform .15s ease;
+    }
+    #music-toggle:hover{ background: var(--toggle-hover); transform: scale(1.06); }
+
+    #mute-btn{ cursor:pointer; font-size:14px; }
+    #volume-slider{
+      width:64px; cursor:pointer; accent-color: var(--candy-pink);
+    }
+
+    .footer{
+      margin-top:18px; text-align:center;
+      font-size:11px; color: var(--ink-soft);
+    }
+
+    @media (max-width:420px){
+      .music-controls #volume-slider{ width:46px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+
+  <main class="page" role="main" aria-label="MaritaKitty Links">
+    <div class="avatar-wrap">
+      <div class="avatar">
+        <img src="marita.jpeg" alt="MaritaKitty avatar">
+      </div>
+    </div>
+
+    <div class="identity">
+      <h1>MaritaKitty</h1>
+      <p class="sub">Streamer · Gamer · Norway/Thailand</p>
+    </div>
+
+    <nav class="links" aria-label="Social links">
+      <a class="link twitch" href="https://twitch.tv/MaritaKitty" target="_blank" rel="noopener">
+        <div class="icon-box"><img src="twitch.jpg" alt="" aria-hidden="true"></div>
+        <div class="label">
+          <span class="platform">Twitch</span>
+          <span class="handle">Live streams & VODs</span>
+        </div>
+        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link tiktok" href="https://www.tiktok.com/@maritakittyy" target="_blank" rel="noopener">
+        <div class="icon-box"><img src="tiktok logo.jpg" alt="" aria-hidden="true"></div>
+        <div class="label">
+          <span class="platform">TikTok</span>
+          <span class="handle">@maritakittyyy</span>
+        </div>
+        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+
+      <a class="link discord" href="https://discord.gg/ephQmnyJ" target="_blank" rel="noopener">
+        <div class="icon-box"><img src="discord.png" alt="" aria-hidden="true"></div>
+        <div class="label">
+          <span class="platform">Discord</span>
+          <span class="handle">Join the community</span>
+        </div>
+        <svg class="go" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </nav>
+
+    <div class="music-player">
+      <div class="disc" id="disc" aria-hidden="true"></div>
+      <div class="music-mid">
+        <div id="song-info">Loading…</div>
+        <div class="music-sub">Lofi beats</div>
+      </div>
+      <div class="music-controls">
+        <button id="music-toggle" aria-pressed="true" aria-label="Pause music">⏸</button>
+        <span id="mute-btn" role="button" tabindex="0" aria-label="Mute">🔊</span>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5" aria-label="Volume">
+      </div>
+      <audio id="bg-music" autoplay></audio>
+    </div>
+
+    <p class="footer">Made with ❤️ by TheAlphie inc</p>
+  </main>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-toggle');
+    const volume = document.getElementById('volume-slider');
+    const muteBtn = document.getElementById('mute-btn');
+    const songInfo = document.getElementById('song-info');
+    const disc = document.getElementById('disc');
+
+    const songs = [
+      'lofi/lofi1.mp3',
+      'lofi/lofi2.mp3',
+      'lofi/lofi3.mp3',
+      'lofi/lofi4.mp3',
+      'lofi/lofi5.mp3'
+    ];
+
+    const songNames = [
+      'Sunset by Aventure',
+      'Love in Japan by Milkey Wyvers',
+      'Time by Avanti',
+      'Florida Keys by Hoffy Beats',
+      'Warm Cup of Coffee by Moavii'
+    ];
+
+    let current = Math.floor(Math.random() * songs.length);
+    music.src = songs[current];
+    music.volume = volume.value;
+    songInfo.textContent = songNames[current];
+    let isMuted = false;
+
+    music.addEventListener('ended', () => {
+      let next;
+      do { next = Math.floor(Math.random() * songs.length); }
+      while (next === current);
+      current = next;
+      music.src = songs[current];
+      music.play();
+      songInfo.textContent = songNames[current];
+    });
+
+    btn.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        btn.textContent = '⏸';
+        btn.setAttribute('aria-pressed', 'true');
+        btn.setAttribute('aria-label', 'Pause music');
+        disc.classList.add('spinning');
+      } else {
+        music.pause();
+        btn.textContent = '▶';
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Play music');
+        disc.classList.remove('spinning');
+      }
+    });
+
+    volume.addEventListener('input', () => {
+      music.volume = volume.value;
+      if (isMuted && volume.value > 0) {
+        isMuted = false;
+        music.muted = false;
+        muteBtn.textContent = '🔊';
+      }
+    });
+
+    function toggleMute(){
+      isMuted = !isMuted;
+      music.muted = isMuted;
+      muteBtn.textContent = isMuted ? '🔇' : '🔊';
+    }
+    muteBtn.addEventListener('click', toggleMute);
+    muteBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMute(); }
+    });
+
+    window.addEventListener('load', () => {
+      music.play().then(() => disc.classList.add('spinning')).catch(() => {
+        btn.textContent = '▶';
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Play music');
+        console.log('Autoplay blocked; user must interact to play.');
+      });
+    });
+  </script>
+</body>
+</html>
